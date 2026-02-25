@@ -2,15 +2,13 @@ import requests
 
 def count_cat_facts_with_cat():
     url = "https://catfact.ninja/facts?limit=10"
+    count = 0
     response = requests.get(url)
     data = response.json()
     facts = data["data"]
-    count = 0
-    # your code here
-    for i in range(10):
-        response = requests.get("https://catfact.ninja/fact")
-        data = response.json()['fact']
-        count += int(data.lower().count('cat'))
+    for fact in facts:
+        if "cat" in fact["fact"].lower():
+           count += 1
     print(count)
 
 count_cat_facts_with_cat()
